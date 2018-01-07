@@ -35,6 +35,7 @@ m.default_rules = {
     length_equal                = string.length_equal,
     length_between              = string.length_between,
     like                        = has_pcre and string.like or string.like_lua,
+    like_lua                    = string.like_lua,
     string                      = string.string,
     eq                          = string.equal,
     integer                     = numeric.integer,
@@ -79,7 +80,8 @@ end
 
 function m.register_default_rules (rules)
     for rule_name, rule_builder in pairs(rules) do
-        assert(type(rule_builder) == 'function')
+        assert(type(rule_name) == 'string')
+        assert(type(rule_builder) == 'function', "RULE_BUILDER [" .. rule_name .. "] SHOULD BE A FUNCTION")
         m.default_rules[rule_name] = rule_builder
     end
 end
@@ -184,6 +186,7 @@ end
 
 function mt:register_rules (rules)
     for rule_name, rule_builder in pairs(rules) do
+        assert(type(rule_name) == 'string')
         assert(type(rule_builder) == 'function', "RULE_BUILDER [" .. rule_name .. "] SHOULD BE A FUNCTION")
         self.validator_builders[rule_name] = rule_builder
     end
