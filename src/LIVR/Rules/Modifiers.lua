@@ -48,7 +48,7 @@ return {
     end,
 
     remove = function (_, chars)
-        local re = '[' .. chars:gsub('-', '%%-') .. ']'
+        local re = '[' .. chars:gsub('[%%%-%]%[%^]', '%%%1') .. ']'
         return function (value)
             if type(value) == 'number' then
                 value = tostring(value)
@@ -61,7 +61,7 @@ return {
     end,
 
     leave_only = function (_, chars)
-        local re = '[^' .. chars:gsub('-', '%%-') .. ']'
+        local re = '[^' .. chars:gsub('[%%%-%]%[]', '%%%1') .. ']'
         return function (value)
             if type(value) == 'number' then
                 value = tostring(value)
