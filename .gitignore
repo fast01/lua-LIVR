@@ -12,7 +12,7 @@ luacov.*
 /5.*
 /debian/debhelper-build-stamp
 /debian/files
-/debian/lua-LIVR*
+/debian/lua-livr*
 /debian/lua_versions
 /debian/tmp
 /debian/trash

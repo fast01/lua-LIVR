@@ -1,0 +1,6 @@
+# test this watch file using:
+# uscan --watchfile debian/watch --upstream-version 0.1.0 --package lua-livr
+#
+version=3
+opts=filenamemangle=s/.+\/v?(\d\S*)\.tar\.gz/lua-livr-$1\.tar\.gz/ \
+  https://github.com/fperrad/lua-LIVR/releases .*/v?(\d\S*)\.tar\.gz

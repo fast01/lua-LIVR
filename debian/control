@@ -1,0 +1,26 @@
+Source: lua-livr
+Section: interpreters
+Priority: optional
+Maintainer: nobody
+Build-Depends: debhelper (>= 9), dh-lua
+Standards-Version: 4.0.0
+Homepage: http://fperrad.github.io/lua-LIVR/
+
+Package: lua-livr
+Architecture: all
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends}
+Provides: ${lua:Provides}
+XB-Lua-Versions: ${lua:Versions}
+Description: lightweight Lua validator supporting LIVR 2.0
+ The documentation of LIVR is available on <http://livr-spec.org>.
+
+Package: lua-livr-dev
+Section: libdevel
+Architecture: all
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends}
+Provides: ${lua:Provides}
+XB-Lua-Versions: ${lua:Versions}
+Description: lua-livr doc
+ This package contains the documentation of the lua-LIVR library.
