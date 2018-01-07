@@ -37,15 +37,19 @@ local function valid_url (s)
     end
 end
 
-local months = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 }
+local months = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 }
 local function valid_date (s)
-    -- TODO
     local year, month, day = s:match"^(%d%d%d%d)%-(%d%d)%-(%d%d)$"
     year = tonumber(year)
     month = tonumber(month)
     day = tonumber(day)
     if year and month and day then
         if month >= 1 and month <= 12 and day >= 1 and day <= months[month] then
+            if month == 2 and day == 29 then
+                if ((year % 4) ~= 0 or (year % 100) == 0) and (year % 400) ~= 0 then
+                    return
+                end
+            end
             return true
         end
     end
