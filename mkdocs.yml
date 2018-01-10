@@ -1,0 +1,11 @@
+site_name: lua-LIVR
+site_description: Lightweight validator supporting Language Independent Validation Rules Specification (LIVR)
+site_author: François Perrad
+repo_url: https://github.com/fperrad/lua-LIVR
+pages:
+- Home: index.md
+- API:
+  - Validator: validator.md
+  - Rules: rules.md
+theme: mkdocs
+copyright: Copyright &copy; 2018 Fran&ccedil;ois Perrad
