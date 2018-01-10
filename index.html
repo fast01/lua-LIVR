@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Lightweight validator supporting Language Independent Validation Rules Specification (LIVR)">
+        <meta name="author" content="François Perrad">
+        
+        <link rel="shortcut icon" href="./img/favicon.ico">
+
+	<title>lua-LIVR</title>
+
+        <link href="./css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="./css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="./css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="./css/highlight.css">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body class="homepage">
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <a class="navbar-brand" href=".">lua-LIVR</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li class="active">
+                        <a href=".">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">API <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="validator/">Validator</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="rules/">Rules</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li class="disabled">
+                        <a rel="next" >
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="validator/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a href="https://github.com/fperrad/lua-Silva">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#lua-livr">lua-LIVR</a></li>
+        
+            <li><a href="#overview">Overview</a></li>
+        
+            <li><a href="#references">References</a></li>
+        
+            <li><a href="#status">Status</a></li>
+        
+            <li><a href="#download">Download</a></li>
+        
+            <li><a href="#installation">Installation</a></li>
+        
+            <li><a href="#test">Test</a></li>
+        
+            <li><a href="#copyright-and-license">Copyright and License</a></li>
+        
+    
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="lua-livr">lua-LIVR</h1>
+<hr />
+<h2 id="overview">Overview</h2>
+<p>lua-LIVR is a lightweight validator supporting Language Independent Validation Rules Specification (LIVR).</p>
+<p>Features:</p>
+<ul>
+<li>Rules are declarative and language independent</li>
+<li>Any number of rules for each field</li>
+<li>Return together errors for all fields</li>
+<li>Excludes all fields that do not have validation rules described</li>
+<li>Has possibility to validatate complex hierarchical structures</li>
+<li>Easy to describe and undersand rules</li>
+<li>Returns understandable error codes(not error messages)</li>
+<li>Easy to add own rules</li>
+<li>Multipurpose (user input validation, configs validation, contracts programming etc)</li>
+</ul>
+<h2 id="references">References</h2>
+<p>The LIVR specifications are available on <a href="http://livr-spec.org/">http://livr-spec.org/</a>.</p>
+<h2 id="status">Status</h2>
+<p>lua-LIVR is in beta stage.</p>
+<p>It's developed for Lua 5.1, 5.2 &amp; 5.3.</p>
+<h2 id="download">Download</h2>
+<p>lua-LIVR source can be downloaded from
+<a href="http://github.com/fperrad/lua-LIVR/releases/">GitHub</a>.</p>
+<h2 id="installation">Installation</h2>
+<p>lua-LIVR have two optional dependencies
+<a href="https://github.com/starwing/luautf8">lua-utf8</a> &amp;
+<a href="https://rrthomas.github.io/lrexlib/">Lrexlib-PCRE</a>.</p>
+<p>lua-LIVR is available via LuaRocks:</p>
+<pre><code class="sh">luarocks install lua-livr
+</code></pre>
+
+<p>or manually, with:</p>
+<pre><code class="sh">make install
+</code></pre>
+
+<h2 id="test">Test</h2>
+<p>The test suite requires the modules
+<a href="http://fperrad.github.io/lua-TestMore/">lua-TestMore</a>,
+<a href="http://dkolf.de/src/dkjson-lua.fsl/home">dkjson</a> &amp;
+<a href="https://keplerproject.github.io/luafilesystem/">LuaFileSystem</a>.</p>
+<pre><code>make test
+</code></pre>
+<h2 id="copyright-and-license">Copyright and License</h2>
+<p>Copyright &copy; 2018 Fran&ccedil;ois Perrad
+<a href="http://www.openhub.net/accounts/4780?ref=Rank"><img alt="OpenHUB" src="http://www.openhub.net/accounts/4780/widgets/account_rank.gif" /></a>
+<a href="http://www.linkedin.com/in/fperrad"><img alt="LinkedIn" src="http://www.linkedin.com/img/webpromo/btn_liprofile_blue_80x15.gif" /></a></p>
+<p>This library is licensed under the terms of the MIT/X11 license, like Lua itself.</p></div>
+            
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+                <p>Copyright &copy; 2018 Fran&ccedil;ois Perrad</p>
+            
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+
+        <script src="./js/jquery-1.10.2.min.js"></script>
+        <script src="./js/bootstrap-3.0.3.min.js"></script>
+        <script src="./js/highlight.pack.js"></script>
+        <script>var base_url = '.';</script>
+        <script data-main="./mkdocs/js/search.js" src="./mkdocs/js/require.js"></script>
+        <script src="./js/base.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
+
+<!--
+MkDocs version : 0.15.3
+Build Date UTC : 2018-01-10 19:21:48
+-->

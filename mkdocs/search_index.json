@@ -1,0 +1,349 @@
+{
+    "docs": [
+        {
+            "location": "/",
+            "text": "lua-LIVR\n\n\n\n\nOverview\n\n\nlua-LIVR is a lightweight validator supporting Language Independent Validation Rules Specification (LIVR).\n\n\nFeatures:\n\n\n\n\nRules are declarative and language independent\n\n\nAny number of rules for each field\n\n\nReturn together errors for all fields\n\n\nExcludes all fields that do not have validation rules described\n\n\nHas possibility to validatate complex hierarchical structures\n\n\nEasy to describe and undersand rules\n\n\nReturns understandable error codes(not error messages)\n\n\nEasy to add own rules\n\n\nMultipurpose (user input validation, configs validation, contracts programming etc)\n\n\n\n\nReferences\n\n\nThe LIVR specifications are available on \nhttp://livr-spec.org/\n.\n\n\nStatus\n\n\nlua-LIVR is in beta stage.\n\n\nIt's developed for Lua 5.1, 5.2 & 5.3.\n\n\nDownload\n\n\nlua-LIVR source can be downloaded from\n\nGitHub\n.\n\n\nInstallation\n\n\nlua-LIVR have two optional dependencies\n\nlua-utf8\n &\n\nLrexlib-PCRE\n.\n\n\nlua-LIVR is available via LuaRocks:\n\n\nluarocks install lua-livr\n\n\n\n\nor manually, with:\n\n\nmake install\n\n\n\n\nTest\n\n\nThe test suite requires the modules\n\nlua-TestMore\n,\n\ndkjson\n &\n\nLuaFileSystem\n.\n\n\nmake test\n\n\n\nCopyright and License\n\n\nCopyright \u00a9 2018 Fran\u00e7ois Perrad\n\n\n\n\n\nThis library is licensed under the terms of the MIT/X11 license, like Lua itself.",
+            "title": "Home"
+        },
+        {
+            "location": "/#lua-livr",
+            "text": "",
+            "title": "lua-LIVR"
+        },
+        {
+            "location": "/#overview",
+            "text": "lua-LIVR is a lightweight validator supporting Language Independent Validation Rules Specification (LIVR).  Features:   Rules are declarative and language independent  Any number of rules for each field  Return together errors for all fields  Excludes all fields that do not have validation rules described  Has possibility to validatate complex hierarchical structures  Easy to describe and undersand rules  Returns understandable error codes(not error messages)  Easy to add own rules  Multipurpose (user input validation, configs validation, contracts programming etc)",
+            "title": "Overview"
+        },
+        {
+            "location": "/#references",
+            "text": "The LIVR specifications are available on  http://livr-spec.org/ .",
+            "title": "References"
+        },
+        {
+            "location": "/#status",
+            "text": "lua-LIVR is in beta stage.  It's developed for Lua 5.1, 5.2 & 5.3.",
+            "title": "Status"
+        },
+        {
+            "location": "/#download",
+            "text": "lua-LIVR source can be downloaded from GitHub .",
+            "title": "Download"
+        },
+        {
+            "location": "/#installation",
+            "text": "lua-LIVR have two optional dependencies lua-utf8  & Lrexlib-PCRE .  lua-LIVR is available via LuaRocks:  luarocks install lua-livr  or manually, with:  make install",
+            "title": "Installation"
+        },
+        {
+            "location": "/#test",
+            "text": "The test suite requires the modules lua-TestMore , dkjson  & LuaFileSystem .  make test",
+            "title": "Test"
+        },
+        {
+            "location": "/#copyright-and-license",
+            "text": "Copyright \u00a9 2018 Fran\u00e7ois Perrad   This library is licensed under the terms of the MIT/X11 license, like Lua itself.",
+            "title": "Copyright and License"
+        },
+        {
+            "location": "/validator/",
+            "text": "LIVR\n\n\n\n\nReference\n\n\nClass functions & members\n\n\nnew( livr_rules [, is_auto_trim] )\n\n\nregister_default_rules( rules )\n\n\nregister_aliased_default_rule( alias )\n\n\ndefault_rules\n\n\ndefault_auto_trim\n\n\nInstance methods\n\n\nvalidate( input )\n\n\nregister_rules( rules )\n\n\nregister_aliased_rule( alias )\n\n\nget_rules()\n\n\nExamples\n\n\nlocal livr = require 'LIVR/Validator'\n\n-- Common usage\nlivr.default_auto_trim = true\n\nlocal validator = livr.new{\n    name      = 'required',\n    email     = { 'required', 'email' },\n    gender    = { one_of = { 'male', 'female' } },\n    phone     = { max_length = 10 },\n    password  = { 'required', { min_length = 10} },\n    password2 = { equal_to_field = 'password' }\n}\n\nlocal valid_data, errors = validator:validate(user_data)\nif valid_data then\n    save_user(valid_data)\nend\n\n-- You can use modifiers separately or can combine them with validation:\nlocal validator = livr.new{\n    email = { 'required', 'trim', 'email', 'to_lc' }\n}\n\n-- Feel free to register your own rules\n-- You can use aliases(preferable, syntax covered by the specification) for a lot of cases:\n\nlocal validator = livr.new{\n    password = { 'required', 'strong_password' }\n}\n\nvalidator:register_aliased_rule{\n    name  = 'strong_password',\n    rules = { min_length = 6 },\n    error = 'WEAK_PASSWORD'\n}\n\n-- or you can write more sophisticated rules directly\n\nlocal validator = livr.new{\n    password = { 'required', 'strong_password' }\n}\n\nvalidator:register_rules{\n    strong_password = function ()\n        return function (value)\n            if value ~= nil and value ~= '' then\n                if type(value) ~= 'string' then\n                    return value, 'FORMAT_ERROR'\n                end\n                if #value < 6 then\n                    return value, 'WEAK_PASSWORD'\n                end\n            end\n            return value\n        end\n    end\n}",
+            "title": "Validator"
+        },
+        {
+            "location": "/validator/#livr",
+            "text": "",
+            "title": "LIVR"
+        },
+        {
+            "location": "/validator/#reference",
+            "text": "",
+            "title": "Reference"
+        },
+        {
+            "location": "/validator/#class-functions-members",
+            "text": "",
+            "title": "Class functions &amp; members"
+        },
+        {
+            "location": "/validator/#new-livr_rules-is_auto_trim",
+            "text": "",
+            "title": "new( livr_rules [, is_auto_trim] )"
+        },
+        {
+            "location": "/validator/#register_default_rules-rules",
+            "text": "",
+            "title": "register_default_rules( rules )"
+        },
+        {
+            "location": "/validator/#register_aliased_default_rule-alias",
+            "text": "",
+            "title": "register_aliased_default_rule( alias )"
+        },
+        {
+            "location": "/validator/#default_rules",
+            "text": "",
+            "title": "default_rules"
+        },
+        {
+            "location": "/validator/#default_auto_trim",
+            "text": "",
+            "title": "default_auto_trim"
+        },
+        {
+            "location": "/validator/#instance-methods",
+            "text": "",
+            "title": "Instance methods"
+        },
+        {
+            "location": "/validator/#validate-input",
+            "text": "",
+            "title": "validate( input )"
+        },
+        {
+            "location": "/validator/#register_rules-rules",
+            "text": "",
+            "title": "register_rules( rules )"
+        },
+        {
+            "location": "/validator/#register_aliased_rule-alias",
+            "text": "",
+            "title": "register_aliased_rule( alias )"
+        },
+        {
+            "location": "/validator/#get_rules",
+            "text": "",
+            "title": "get_rules()"
+        },
+        {
+            "location": "/validator/#examples",
+            "text": "local livr = require 'LIVR/Validator'\n\n-- Common usage\nlivr.default_auto_trim = true\n\nlocal validator = livr.new{\n    name      = 'required',\n    email     = { 'required', 'email' },\n    gender    = { one_of = { 'male', 'female' } },\n    phone     = { max_length = 10 },\n    password  = { 'required', { min_length = 10} },\n    password2 = { equal_to_field = 'password' }\n}\n\nlocal valid_data, errors = validator:validate(user_data)\nif valid_data then\n    save_user(valid_data)\nend\n\n-- You can use modifiers separately or can combine them with validation:\nlocal validator = livr.new{\n    email = { 'required', 'trim', 'email', 'to_lc' }\n}\n\n-- Feel free to register your own rules\n-- You can use aliases(preferable, syntax covered by the specification) for a lot of cases:\n\nlocal validator = livr.new{\n    password = { 'required', 'strong_password' }\n}\n\nvalidator:register_aliased_rule{\n    name  = 'strong_password',\n    rules = { min_length = 6 },\n    error = 'WEAK_PASSWORD'\n}\n\n-- or you can write more sophisticated rules directly\n\nlocal validator = livr.new{\n    password = { 'required', 'strong_password' }\n}\n\nvalidator:register_rules{\n    strong_password = function ()\n        return function (value)\n            if value ~= nil and value ~= '' then\n                if type(value) ~= 'string' then\n                    return value, 'FORMAT_ERROR'\n                end\n                if #value < 6 then\n                    return value, 'WEAK_PASSWORD'\n                end\n            end\n            return value\n        end\n    end\n}",
+            "title": "Examples"
+        },
+        {
+            "location": "/rules/",
+            "text": "LIVR\n\n\n\n\nRules\n\n\nCommon Rules\n\n\nrequired\n\n\nnot_empty\n\n\nnot_empty_list\n\n\nany_object\n\n\nString Rules\n\n\nstring\n\n\neq\n\n\none_of\n\n\nmax_length\n\n\nmin_length\n\n\nlength_between\n\n\nlength_equal\n\n\nlike\n\n\nlike_lua\n\n\nNumeric Rules\n\n\ninteger\n\n\npositive_integer\n\n\ndecimal\n\n\npositive_decimal\n\n\nmax_number\n\n\nmin_number\n\n\nnumber_between\n\n\nSpecial Rules\n\n\nemail\n\n\nurl\n\n\niso_date\n\n\nequal_to_field\n\n\nMetarules\n\n\nnested_object\n\n\nvariable_object\n\n\nlist_of\n\n\nlist_of_objects\n\n\nlist_of_different_objects\n\n\nor (experimental)\n\n\nModifiers\n\n\ntrim\n\n\nto_lc\n\n\nto_uc\n\n\nremove\n\n\nleave_only\n\n\ndefault",
+            "title": "Rules"
+        },
+        {
+            "location": "/rules/#livr",
+            "text": "",
+            "title": "LIVR"
+        },
+        {
+            "location": "/rules/#rules",
+            "text": "",
+            "title": "Rules"
+        },
+        {
+            "location": "/rules/#common-rules",
+            "text": "",
+            "title": "Common Rules"
+        },
+        {
+            "location": "/rules/#required",
+            "text": "",
+            "title": "required"
+        },
+        {
+            "location": "/rules/#not95empty",
+            "text": "",
+            "title": "not_empty"
+        },
+        {
+            "location": "/rules/#not95empty95list",
+            "text": "",
+            "title": "not_empty_list"
+        },
+        {
+            "location": "/rules/#any95object",
+            "text": "",
+            "title": "any_object"
+        },
+        {
+            "location": "/rules/#string-rules",
+            "text": "",
+            "title": "String Rules"
+        },
+        {
+            "location": "/rules/#string",
+            "text": "",
+            "title": "string"
+        },
+        {
+            "location": "/rules/#eq",
+            "text": "",
+            "title": "eq"
+        },
+        {
+            "location": "/rules/#one95of",
+            "text": "",
+            "title": "one_of"
+        },
+        {
+            "location": "/rules/#max95length",
+            "text": "",
+            "title": "max_length"
+        },
+        {
+            "location": "/rules/#min95length",
+            "text": "",
+            "title": "min_length"
+        },
+        {
+            "location": "/rules/#length95between",
+            "text": "",
+            "title": "length_between"
+        },
+        {
+            "location": "/rules/#length95equal",
+            "text": "",
+            "title": "length_equal"
+        },
+        {
+            "location": "/rules/#like",
+            "text": "",
+            "title": "like"
+        },
+        {
+            "location": "/rules/#like_lua",
+            "text": "",
+            "title": "like_lua"
+        },
+        {
+            "location": "/rules/#numeric-rules",
+            "text": "",
+            "title": "Numeric Rules"
+        },
+        {
+            "location": "/rules/#integer",
+            "text": "",
+            "title": "integer"
+        },
+        {
+            "location": "/rules/#positive95integer",
+            "text": "",
+            "title": "positive_integer"
+        },
+        {
+            "location": "/rules/#decimal",
+            "text": "",
+            "title": "decimal"
+        },
+        {
+            "location": "/rules/#positive95decimal",
+            "text": "",
+            "title": "positive_decimal"
+        },
+        {
+            "location": "/rules/#max95number",
+            "text": "",
+            "title": "max_number"
+        },
+        {
+            "location": "/rules/#min95number",
+            "text": "",
+            "title": "min_number"
+        },
+        {
+            "location": "/rules/#number95between",
+            "text": "",
+            "title": "number_between"
+        },
+        {
+            "location": "/rules/#special-rules",
+            "text": "",
+            "title": "Special Rules"
+        },
+        {
+            "location": "/rules/#email",
+            "text": "",
+            "title": "email"
+        },
+        {
+            "location": "/rules/#url",
+            "text": "",
+            "title": "url"
+        },
+        {
+            "location": "/rules/#iso95date",
+            "text": "",
+            "title": "iso_date"
+        },
+        {
+            "location": "/rules/#equal95to95field",
+            "text": "",
+            "title": "equal_to_field"
+        },
+        {
+            "location": "/rules/#metarules",
+            "text": "",
+            "title": "Metarules"
+        },
+        {
+            "location": "/rules/#nested95object",
+            "text": "",
+            "title": "nested_object"
+        },
+        {
+            "location": "/rules/#variable95object",
+            "text": "",
+            "title": "variable_object"
+        },
+        {
+            "location": "/rules/#list95of",
+            "text": "",
+            "title": "list_of"
+        },
+        {
+            "location": "/rules/#list95of95objects",
+            "text": "",
+            "title": "list_of_objects"
+        },
+        {
+            "location": "/rules/#list95of95different95objects",
+            "text": "",
+            "title": "list_of_different_objects"
+        },
+        {
+            "location": "/rules/#or-40experimental41",
+            "text": "",
+            "title": "or (experimental)"
+        },
+        {
+            "location": "/rules/#modifiers",
+            "text": "",
+            "title": "Modifiers"
+        },
+        {
+            "location": "/rules/#trim",
+            "text": "",
+            "title": "trim"
+        },
+        {
+            "location": "/rules/#to95lc",
+            "text": "",
+            "title": "to_lc"
+        },
+        {
+            "location": "/rules/#to95uc",
+            "text": "",
+            "title": "to_uc"
+        },
+        {
+            "location": "/rules/#remove",
+            "text": "",
+            "title": "remove"
+        },
+        {
+            "location": "/rules/#leave95only",
+            "text": "",
+            "title": "leave_only"
+        },
+        {
+            "location": "/rules/#default",
+            "text": "",
+            "title": "default"
+        }
+    ]
+}
