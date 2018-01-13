@@ -14,16 +14,31 @@ end
 
 local schemes = { http = true, https = true }
 local function valid_url (s)
-    -- TODO
-    local scheme = s:match"^(%w+)://"
-    if schemes[scheme and scheme:lower()] then
-        local pos = s:match'?()'
-        local path = s:sub(1, tonumber(pos) or #s)
-        if path:match'_' then
-            return
-        end
+    local ipos, npos, scheme
+    scheme, npos = s:match("^(%a[%w+.-]*):()")
+    if not scheme or not schemes[scheme:lower()] then
+        return
+    end
+    ipos = npos
+    npos = s:match("^//[%w%-.]+()", ipos)                       -- host
+    if npos then
+        ipos = npos
+        npos = s:match("^:[%d]+()", ipos)                       -- port
+    end
+    ipos = npos or ipos
+    if ipos > #s then
         return true
     end
+    npos = s:match("^/[^?#]*()", ipos)                          -- path
+    if not npos then
+        return
+    end
+    ipos = npos
+    npos = s:match("^?[%w%-._~%%!$&'()*+,;=:@/?]*()", ipos)     -- query
+    ipos = npos or ipos
+    npos = s:match("^#[%w%-._~%%!$&'()*+,;=:@/?]*()", ipos)     -- fragment
+    ipos = npos or ipos
+    return ipos > #s
 end
 
 local function leap_year (year)
