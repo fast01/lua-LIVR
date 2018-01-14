@@ -9,18 +9,7 @@ local type = type
 local _ENV = nil
 
 local function valid_email (s)
-    -- TODO
-    if s:match' ' then
-        return
-    end
-    local pos = s:match'@()'
-    if not pos then
-        return
-    end
-    if s:match('[@_]', pos) then
-        return
-    end
-    return true
+    return s:match'^[%w._+-]+@[%w.+-]+$'
 end
 
 local schemes = { http = true, https = true }
