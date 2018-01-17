@@ -32,7 +32,7 @@ global table containing all default rule_builders.
 
 #### default_auto_trim
 
-global boolean.
+global boolean, its default value is `false`.
 
 ## Instance methods
 

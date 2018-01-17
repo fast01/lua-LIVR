@@ -2,7 +2,7 @@
 
 require 'Test.More'
 
-plan(18)
+plan(19)
 
 if not require_ok 'LIVR/Validator' then
     BAIL_OUT "no lib"
@@ -14,6 +14,7 @@ is( m, package.loaded['LIVR/Validator'], 'package.loaded' )
 
 type_ok( m.default_rules, 'table', 'default_rules' )
 type_ok( m.default_auto_trim, 'boolean', 'default_auto_trim' )
+is( m.default_auto_trim, false, 'default_auto_trim' )
 type_ok( m.new, 'function', 'new' )
 type_ok( m.register_default_rules, 'function', 'register_default_rules' )
 type_ok( m.register_aliased_default_rule, 'function', 'register_aliased_default_rule' )
