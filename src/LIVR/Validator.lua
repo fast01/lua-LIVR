@@ -65,13 +65,13 @@ m.default_rules = {
 
 m.default_auto_trim = false
 
-function m.new (livr_rules, is_auto_trim)
+function m.new (rules, is_auto_trim)
     local obj = {
-        livr_rules         = livr_rules,
+        rules              = rules,
         validators         = nil,
         validator_builders = {},
         errors             = nil,
-        is_auto_trim       = is_auto_trim or m.default_auto_trim,
+        auto_trim          = is_auto_trim or m.default_auto_trim,
     }
     setmetatable(obj, { __index = mt })
     obj:register_rules(m.default_rules)
@@ -107,7 +107,7 @@ end
 
 function mt:prepare ()
     self.validators = {}
-    for field, field_rules in pairs(self.livr_rules) do
+    for field, field_rules in pairs(self.rules) do
         local validators = {}
         if type(field_rules) ~= 'table' then
             validators[#validators+1] = self:_build_validator(field_rules, {})
@@ -157,7 +157,7 @@ function mt:validate (data)
     if type(data) ~= 'table' then
         return nil, 'FORMAT_ERROR'
     end
-    if self.is_auto_trim then
+    if self.auto_trim then
         _auto_trim(data)
     end
     local errors = {}
