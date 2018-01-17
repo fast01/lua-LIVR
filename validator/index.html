@@ -141,16 +141,42 @@
 <hr />
 <h1 id="reference">Reference</h1>
 <h2 id="class-functions-members">Class functions &amp; members</h2>
-<h4 id="new-livr_rules-is_auto_trim">new( livr_rules [, is_auto_trim] )</h4>
+<h4 id="new-rules-is_auto_trim">new( rules [, is_auto_trim] )</h4>
+<p>Creates an <em>validator</em> instance from the table <code>rules</code>.
+When the boolean <code>is_auto_trim</code> is missing, the global <code>default_auto_trim</code> is used.</p>
 <h4 id="register_default_rules-rules">register_default_rules( rules )</h4>
+<p>Registers additional <code>rules</code>. <code>rules</code> is a table, where keys are string <em>rule name</em>
+and values are function <em>rule builder</em>.</p>
 <h4 id="register_aliased_default_rule-alias">register_aliased_default_rule( alias )</h4>
+<p>Registers an aliased rule.
+<code>alias</code> is a table with:</p>
+<ul>
+<li>a required key <code>name</code>, the associated value is a string</li>
+<li>a required key <code>rules</code>, the associated value is a table or a string</li>
+<li>an optional key <code>error</code>, the associated value is a string</li>
+</ul>
 <h4 id="default_rules">default_rules</h4>
+<p>global table containing all default rule_builders.</p>
 <h4 id="default_auto_trim">default_auto_trim</h4>
+<p>global boolean.</p>
 <h2 id="instance-methods">Instance methods</h2>
 <h4 id="validate-input">validate( input )</h4>
+<p>Validates the table user <code>input</code>.
+On success returns a table which contains only data that has described validation rules.
+On error returns <code>nil</code> and a table which contains all errors.</p>
 <h4 id="register_rules-rules">register_rules( rules )</h4>
+<p>Registers additional <code>rules</code>. <code>rules</code> is a table, where keys are string <em>rule name</em>
+and values are function <em>rule builder</em>.</p>
 <h4 id="register_aliased_rule-alias">register_aliased_rule( alias )</h4>
+<p>Registers an aliased rule.
+<code>alias</code> is a table with:</p>
+<ul>
+<li>a required key <code>name</code>, the associated value is a string</li>
+<li>a required key <code>rules</code>, the associated value is a table or a string</li>
+<li>an optional key <code>error</code>, the associated value is a string</li>
+</ul>
 <h4 id="get_rules">get_rules()</h4>
+<p>Returns a table containing all rule_builders for the validator.</p>
 <h1 id="examples">Examples</h1>
 <pre><code class="lua">local livr = require 'LIVR/Validator'
 

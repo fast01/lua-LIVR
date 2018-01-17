@@ -146,11 +146,13 @@
 <hr />
 <h1 id="rules">Rules</h1>
 <h2 id="common-rules">Common Rules</h2>
+<p>See <a href="http://livr-spec.org/validation-rules/common-rules.html">http://livr-spec.org/validation-rules/common-rules.html</a>.</p>
 <h4 id="required">required</h4>
 <h4 id="not95empty">not_empty</h4>
 <h4 id="not95empty95list">not_empty_list</h4>
 <h4 id="any95object">any_object</h4>
 <h2 id="string-rules">String Rules</h2>
+<p>See <a href="http://livr-spec.org/validation-rules/string-rules.html">http://livr-spec.org/validation-rules/string-rules.html</a>.</p>
 <h4 id="string">string</h4>
 <h4 id="eq">eq</h4>
 <h4 id="one95of">one_of</h4>
@@ -158,9 +160,18 @@
 <h4 id="min95length">min_length</h4>
 <h4 id="length95between">length_between</h4>
 <h4 id="length95equal">length_equal</h4>
+<p>The correct computation of the length of UTF-8 string requires <strong>Lua 5.3</strong>,
+or <a href="https://github.com/keplerproject/lua-compat-5.3">compat53</a>
+or <a href="https://github.com/starwing/luautf8">lua-utf8</a>.</p>
 <h4 id="like">like</h4>
+<p><a href="https://rrthomas.github.io/lrexlib/">Lrexlib-PCRE</a> allows the use of
+<a href="https://en.wikipedia.org/wiki/Perl_Compatible_Regular_Expressions">PCRE</a> regexp,
+otherwise <code>like</code> behaves as <code>like_lua</code>.</p>
 <h4 id="like_lua">like_lua</h4>
+<p>This rule allows to use <a href="https://www.lua.org/manual/5.3/manual.html#6.4.1">Lua patterns</a>
+as regexp.</p>
 <h2 id="numeric-rules">Numeric Rules</h2>
+<p>See <a href="http://livr-spec.org/validation-rules/numeric-rules.html">http://livr-spec.org/validation-rules/numeric-rules.html</a>.</p>
 <h4 id="integer">integer</h4>
 <h4 id="positive95integer">positive_integer</h4>
 <h4 id="decimal">decimal</h4>
@@ -169,11 +180,13 @@
 <h4 id="min95number">min_number</h4>
 <h4 id="number95between">number_between</h4>
 <h2 id="special-rules">Special Rules</h2>
+<p>See <a href="http://livr-spec.org/validation-rules/special-rules.html">http://livr-spec.org/validation-rules/special-rules.html</a>.</p>
 <h4 id="email">email</h4>
 <h4 id="url">url</h4>
 <h4 id="iso95date">iso_date</h4>
 <h4 id="equal95to95field">equal_to_field</h4>
 <h2 id="metarules">Metarules</h2>
+<p>See <a href="http://livr-spec.org/validation-rules/metarules.html">http://livr-spec.org/validation-rules/metarules.html</a>.</p>
 <h4 id="nested95object">nested_object</h4>
 <h4 id="variable95object">variable_object</h4>
 <h4 id="list95of">list_of</h4>
@@ -181,9 +194,12 @@
 <h4 id="list95of95different95objects">list_of_different_objects</h4>
 <h4 id="or-40experimental41">or (experimental)</h4>
 <h2 id="modifiers">Modifiers</h2>
+<p>See <a href="http://livr-spec.org/validation-rules/modifiers.html">http://livr-spec.org/validation-rules/modifiers.html</a>.</p>
 <h4 id="trim">trim</h4>
 <h4 id="to95lc">to_lc</h4>
+<p>The correct processing of UTF-8 string requires <a href="https://github.com/starwing/luautf8">lua-utf8</a>.</p>
 <h4 id="to95uc">to_uc</h4>
+<p>The correct processing of UTF-8 string requires <a href="https://github.com/starwing/luautf8">lua-utf8</a>.</p>
 <h4 id="remove">remove</h4>
 <h4 id="leave95only">leave_only</h4>
 <h4 id="default">default</h4></div>

@@ -47,7 +47,7 @@
         },
         {
             "location": "/validator/",
-            "text": "LIVR\n\n\n\n\nReference\n\n\nClass functions & members\n\n\nnew( livr_rules [, is_auto_trim] )\n\n\nregister_default_rules( rules )\n\n\nregister_aliased_default_rule( alias )\n\n\ndefault_rules\n\n\ndefault_auto_trim\n\n\nInstance methods\n\n\nvalidate( input )\n\n\nregister_rules( rules )\n\n\nregister_aliased_rule( alias )\n\n\nget_rules()\n\n\nExamples\n\n\nlocal livr = require 'LIVR/Validator'\n\n-- Common usage\nlivr.default_auto_trim = true\n\nlocal validator = livr.new{\n    name      = 'required',\n    email     = { 'required', 'email' },\n    gender    = { one_of = { 'male', 'female' } },\n    phone     = { max_length = 10 },\n    password  = { 'required', { min_length = 10} },\n    password2 = { equal_to_field = 'password' }\n}\n\nlocal valid_data, errors = validator:validate(user_data)\nif valid_data then\n    save_user(valid_data)\nend\n\n-- You can use modifiers separately or can combine them with validation:\nlocal validator = livr.new{\n    email = { 'required', 'trim', 'email', 'to_lc' }\n}\n\n-- Feel free to register your own rules\n-- You can use aliases(preferable, syntax covered by the specification) for a lot of cases:\n\nlocal validator = livr.new{\n    password = { 'required', 'strong_password' }\n}\n\nvalidator:register_aliased_rule{\n    name  = 'strong_password',\n    rules = { min_length = 6 },\n    error = 'WEAK_PASSWORD'\n}\n\n-- or you can write more sophisticated rules directly\n\nlocal validator = livr.new{\n    password = { 'required', 'strong_password' }\n}\n\nvalidator:register_rules{\n    strong_password = function ()\n        return function (value)\n            if value ~= nil and value ~= '' then\n                if type(value) ~= 'string' then\n                    return value, 'FORMAT_ERROR'\n                end\n                if #value < 6 then\n                    return value, 'WEAK_PASSWORD'\n                end\n            end\n            return value\n        end\n    end\n}",
+            "text": "LIVR\n\n\n\n\nReference\n\n\nClass functions & members\n\n\nnew( rules [, is_auto_trim] )\n\n\nCreates an \nvalidator\n instance from the table \nrules\n.\nWhen the boolean \nis_auto_trim\n is missing, the global \ndefault_auto_trim\n is used.\n\n\nregister_default_rules( rules )\n\n\nRegisters additional \nrules\n. \nrules\n is a table, where keys are string \nrule name\n\nand values are function \nrule builder\n.\n\n\nregister_aliased_default_rule( alias )\n\n\nRegisters an aliased rule.\n\nalias\n is a table with:\n\n\n\n\na required key \nname\n, the associated value is a string\n\n\na required key \nrules\n, the associated value is a table or a string\n\n\nan optional key \nerror\n, the associated value is a string\n\n\n\n\ndefault_rules\n\n\nglobal table containing all default rule_builders.\n\n\ndefault_auto_trim\n\n\nglobal boolean.\n\n\nInstance methods\n\n\nvalidate( input )\n\n\nValidates the table user \ninput\n.\nOn success returns a table which contains only data that has described validation rules.\nOn error returns \nnil\n and a table which contains all errors.\n\n\nregister_rules( rules )\n\n\nRegisters additional \nrules\n. \nrules\n is a table, where keys are string \nrule name\n\nand values are function \nrule builder\n.\n\n\nregister_aliased_rule( alias )\n\n\nRegisters an aliased rule.\n\nalias\n is a table with:\n\n\n\n\na required key \nname\n, the associated value is a string\n\n\na required key \nrules\n, the associated value is a table or a string\n\n\nan optional key \nerror\n, the associated value is a string\n\n\n\n\nget_rules()\n\n\nReturns a table containing all rule_builders for the validator.\n\n\nExamples\n\n\nlocal livr = require 'LIVR/Validator'\n\n-- Common usage\nlivr.default_auto_trim = true\n\nlocal validator = livr.new{\n    name      = 'required',\n    email     = { 'required', 'email' },\n    gender    = { one_of = { 'male', 'female' } },\n    phone     = { max_length = 10 },\n    password  = { 'required', { min_length = 10} },\n    password2 = { equal_to_field = 'password' }\n}\n\nlocal valid_data, errors = validator:validate(user_data)\nif valid_data then\n    save_user(valid_data)\nend\n\n-- You can use modifiers separately or can combine them with validation:\nlocal validator = livr.new{\n    email = { 'required', 'trim', 'email', 'to_lc' }\n}\n\n-- Feel free to register your own rules\n-- You can use aliases(preferable, syntax covered by the specification) for a lot of cases:\n\nlocal validator = livr.new{\n    password = { 'required', 'strong_password' }\n}\n\nvalidator:register_aliased_rule{\n    name  = 'strong_password',\n    rules = { min_length = 6 },\n    error = 'WEAK_PASSWORD'\n}\n\n-- or you can write more sophisticated rules directly\n\nlocal validator = livr.new{\n    password = { 'required', 'strong_password' }\n}\n\nvalidator:register_rules{\n    strong_password = function ()\n        return function (value)\n            if value ~= nil and value ~= '' then\n                if type(value) ~= 'string' then\n                    return value, 'FORMAT_ERROR'\n                end\n                if #value < 6 then\n                    return value, 'WEAK_PASSWORD'\n                end\n            end\n            return value\n        end\n    end\n}",
             "title": "Validator"
         },
         {
@@ -66,28 +66,28 @@
             "title": "Class functions &amp; members"
         },
         {
-            "location": "/validator/#new-livr_rules-is_auto_trim",
-            "text": "",
-            "title": "new( livr_rules [, is_auto_trim] )"
+            "location": "/validator/#new-rules-is_auto_trim",
+            "text": "Creates an  validator  instance from the table  rules .\nWhen the boolean  is_auto_trim  is missing, the global  default_auto_trim  is used.",
+            "title": "new( rules [, is_auto_trim] )"
         },
         {
             "location": "/validator/#register_default_rules-rules",
-            "text": "",
+            "text": "Registers additional  rules .  rules  is a table, where keys are string  rule name \nand values are function  rule builder .",
             "title": "register_default_rules( rules )"
         },
         {
             "location": "/validator/#register_aliased_default_rule-alias",
-            "text": "",
+            "text": "Registers an aliased rule. alias  is a table with:   a required key  name , the associated value is a string  a required key  rules , the associated value is a table or a string  an optional key  error , the associated value is a string",
             "title": "register_aliased_default_rule( alias )"
         },
         {
             "location": "/validator/#default_rules",
-            "text": "",
+            "text": "global table containing all default rule_builders.",
             "title": "default_rules"
         },
         {
             "location": "/validator/#default_auto_trim",
-            "text": "",
+            "text": "global boolean.",
             "title": "default_auto_trim"
         },
         {
@@ -97,22 +97,22 @@
         },
         {
             "location": "/validator/#validate-input",
-            "text": "",
+            "text": "Validates the table user  input .\nOn success returns a table which contains only data that has described validation rules.\nOn error returns  nil  and a table which contains all errors.",
             "title": "validate( input )"
         },
         {
             "location": "/validator/#register_rules-rules",
-            "text": "",
+            "text": "Registers additional  rules .  rules  is a table, where keys are string  rule name \nand values are function  rule builder .",
             "title": "register_rules( rules )"
         },
         {
             "location": "/validator/#register_aliased_rule-alias",
-            "text": "",
+            "text": "Registers an aliased rule. alias  is a table with:   a required key  name , the associated value is a string  a required key  rules , the associated value is a table or a string  an optional key  error , the associated value is a string",
             "title": "register_aliased_rule( alias )"
         },
         {
             "location": "/validator/#get_rules",
-            "text": "",
+            "text": "Returns a table containing all rule_builders for the validator.",
             "title": "get_rules()"
         },
         {
@@ -122,7 +122,7 @@
         },
         {
             "location": "/rules/",
-            "text": "LIVR\n\n\n\n\nRules\n\n\nCommon Rules\n\n\nrequired\n\n\nnot_empty\n\n\nnot_empty_list\n\n\nany_object\n\n\nString Rules\n\n\nstring\n\n\neq\n\n\none_of\n\n\nmax_length\n\n\nmin_length\n\n\nlength_between\n\n\nlength_equal\n\n\nlike\n\n\nlike_lua\n\n\nNumeric Rules\n\n\ninteger\n\n\npositive_integer\n\n\ndecimal\n\n\npositive_decimal\n\n\nmax_number\n\n\nmin_number\n\n\nnumber_between\n\n\nSpecial Rules\n\n\nemail\n\n\nurl\n\n\niso_date\n\n\nequal_to_field\n\n\nMetarules\n\n\nnested_object\n\n\nvariable_object\n\n\nlist_of\n\n\nlist_of_objects\n\n\nlist_of_different_objects\n\n\nor (experimental)\n\n\nModifiers\n\n\ntrim\n\n\nto_lc\n\n\nto_uc\n\n\nremove\n\n\nleave_only\n\n\ndefault",
+            "text": "LIVR\n\n\n\n\nRules\n\n\nCommon Rules\n\n\nSee \nhttp://livr-spec.org/validation-rules/common-rules.html\n.\n\n\nrequired\n\n\nnot_empty\n\n\nnot_empty_list\n\n\nany_object\n\n\nString Rules\n\n\nSee \nhttp://livr-spec.org/validation-rules/string-rules.html\n.\n\n\nstring\n\n\neq\n\n\none_of\n\n\nmax_length\n\n\nmin_length\n\n\nlength_between\n\n\nlength_equal\n\n\nThe correct computation of the length of UTF-8 string requires \nLua 5.3\n,\nor \ncompat53\n\nor \nlua-utf8\n.\n\n\nlike\n\n\nLrexlib-PCRE\n allows the use of\n\nPCRE\n regexp,\notherwise \nlike\n behaves as \nlike_lua\n.\n\n\nlike_lua\n\n\nThis rule allows to use \nLua patterns\n\nas regexp.\n\n\nNumeric Rules\n\n\nSee \nhttp://livr-spec.org/validation-rules/numeric-rules.html\n.\n\n\ninteger\n\n\npositive_integer\n\n\ndecimal\n\n\npositive_decimal\n\n\nmax_number\n\n\nmin_number\n\n\nnumber_between\n\n\nSpecial Rules\n\n\nSee \nhttp://livr-spec.org/validation-rules/special-rules.html\n.\n\n\nemail\n\n\nurl\n\n\niso_date\n\n\nequal_to_field\n\n\nMetarules\n\n\nSee \nhttp://livr-spec.org/validation-rules/metarules.html\n.\n\n\nnested_object\n\n\nvariable_object\n\n\nlist_of\n\n\nlist_of_objects\n\n\nlist_of_different_objects\n\n\nor (experimental)\n\n\nModifiers\n\n\nSee \nhttp://livr-spec.org/validation-rules/modifiers.html\n.\n\n\ntrim\n\n\nto_lc\n\n\nThe correct processing of UTF-8 string requires \nlua-utf8\n.\n\n\nto_uc\n\n\nThe correct processing of UTF-8 string requires \nlua-utf8\n.\n\n\nremove\n\n\nleave_only\n\n\ndefault",
             "title": "Rules"
         },
         {
@@ -137,7 +137,7 @@
         },
         {
             "location": "/rules/#common-rules",
-            "text": "",
+            "text": "See  http://livr-spec.org/validation-rules/common-rules.html .",
             "title": "Common Rules"
         },
         {
@@ -162,7 +162,7 @@
         },
         {
             "location": "/rules/#string-rules",
-            "text": "",
+            "text": "See  http://livr-spec.org/validation-rules/string-rules.html .",
             "title": "String Rules"
         },
         {
@@ -197,22 +197,22 @@
         },
         {
             "location": "/rules/#length95equal",
-            "text": "",
+            "text": "The correct computation of the length of UTF-8 string requires  Lua 5.3 ,\nor  compat53 \nor  lua-utf8 .",
             "title": "length_equal"
         },
         {
             "location": "/rules/#like",
-            "text": "",
+            "text": "Lrexlib-PCRE  allows the use of PCRE  regexp,\notherwise  like  behaves as  like_lua .",
             "title": "like"
         },
         {
             "location": "/rules/#like_lua",
-            "text": "",
+            "text": "This rule allows to use  Lua patterns \nas regexp.",
             "title": "like_lua"
         },
         {
             "location": "/rules/#numeric-rules",
-            "text": "",
+            "text": "See  http://livr-spec.org/validation-rules/numeric-rules.html .",
             "title": "Numeric Rules"
         },
         {
@@ -252,7 +252,7 @@
         },
         {
             "location": "/rules/#special-rules",
-            "text": "",
+            "text": "See  http://livr-spec.org/validation-rules/special-rules.html .",
             "title": "Special Rules"
         },
         {
@@ -277,7 +277,7 @@
         },
         {
             "location": "/rules/#metarules",
-            "text": "",
+            "text": "See  http://livr-spec.org/validation-rules/metarules.html .",
             "title": "Metarules"
         },
         {
@@ -312,7 +312,7 @@
         },
         {
             "location": "/rules/#modifiers",
-            "text": "",
+            "text": "See  http://livr-spec.org/validation-rules/modifiers.html .",
             "title": "Modifiers"
         },
         {
@@ -322,12 +322,12 @@
         },
         {
             "location": "/rules/#to95lc",
-            "text": "",
+            "text": "The correct processing of UTF-8 string requires  lua-utf8 .",
             "title": "to_lc"
         },
         {
             "location": "/rules/#to95uc",
-            "text": "",
+            "text": "The correct processing of UTF-8 string requires  lua-utf8 .",
             "title": "to_uc"
         },
         {
