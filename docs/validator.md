@@ -7,34 +7,58 @@
 
 ## Class functions & members
 
-#### new( livr_rules [, is_auto_trim] )
+#### new( rules [, is_auto_trim] )
 
+Creates an *validator* instance from the table `rules`.
+When the boolean `is_auto_trim` is missing, the global `default_auto_trim` is used.
 
 #### register_default_rules( rules )
 
+Registers additional `rules`. `rules` is a table, where keys are string *rule name*
+and values are function *rule builder*.
 
 #### register_aliased_default_rule( alias )
 
+Registers an aliased rule.
+`alias` is a table with:
+
+- a required key `name`, the associated value is a string
+- a required key `rules`, the associated value is a table or a string
+- an optional key `error`, the associated value is a string
 
 #### default_rules
 
+global table containing all default rule_builders.
 
 #### default_auto_trim
 
-
+global boolean.
 
 ## Instance methods
 
 #### validate( input )
 
+Validates the table user `input`.
+On success returns a table which contains only data that has described validation rules.
+On error returns `nil` and a table which contains all errors.
 
 #### register_rules( rules )
 
+Registers additional `rules`. `rules` is a table, where keys are string *rule name*
+and values are function *rule builder*.
 
 #### register_aliased_rule( alias )
 
+Registers an aliased rule.
+`alias` is a table with:
+
+- a required key `name`, the associated value is a string
+- a required key `rules`, the associated value is a table or a string
+- an optional key `error`, the associated value is a string
 
 #### get_rules()
+
+Returns a table containing all rule_builders for the validator.
 
 
 # Examples
