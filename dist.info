@@ -1,6 +1,6 @@
 
 name = "lua-LIVR"
-version = "0.0.1"
+version = "0.1.0"
 
 desc = "Lightweight validator supporting Language Independent Validation Rules Specification (LIVR)"
 author = "Francois Perrad"

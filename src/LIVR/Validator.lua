@@ -208,7 +208,7 @@ function mt:_build_validator (name, args)
 end
 
 m._NAME = ...
-m._VERSION = "0.0.1"
+m._VERSION = "0.1.0"
 m._DESCRIPTION = "lua-LIVR : Lightweight validator supporting LIVR 2.0"
 m._COPYRIGHT = "Copyright (c) 2018 Francois Perrad"
 return m
